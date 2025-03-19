@@ -11,7 +11,7 @@ version = "_vtest"
 
 allFundNames = ["RRF", "CP", "HE21", "HE23", "HE25", "EuroHPC", "EIC", "IHI", "KDT", "SNS", "DEP", "CEF2"]
 
-mainfold = r"C:\Juan\Trabajo\JRC\Mapping\2025\2025\code_jtj\HPC investments\APP"
+mainfold = os.getcwd()
 outputfold = os.path.join(mainfold, "output")
 datafold = os.path.join(mainfold, "data")
 
