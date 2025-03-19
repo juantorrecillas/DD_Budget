@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Keyword Search App</title>
+    <style>
+        /* Use a modern, clean font */
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #121212; /* Dark background */
+            color: #e0e0e0; /* Light text color for contrast */
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+        }
+
+        h1 {
+            font-size: 2em; /* Smaller font size for the header */
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        form {
+            background-color: #1e1e1e;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+            width: 100%;
+            max-width: 450px; /* Reduced max-width for the form */
+        }
+
+        label, input[type="text"] {
+            display: block;
+            width: 100%;
+            margin: 10px 0;
+            font-size: 0.9em; /* Smaller font size for labels and input */
+        }
+
+        input[type="text"] {
+            padding: 8px;
+            border-radius: 4px;
+            border: 1px solid #333;
+            background-color: #2a2a2a;
+            color: #e0e0e0;
+        }
+
+        input[type="submit"] {
+            background-color: #6200ea;
+            color: white;
+            padding: 8px 16px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            font-size: 0.9em; /* Smaller font size for the button */
+        }
+
+        input[type="submit"]:hover {
+            background-color: #3700b3;
+        }
+
+        table.data {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+            max-width: 90%; /* Adjusted max-width for the table */
+            font-size: 0.8em; /* Smaller font size for table content */
+        }
+
+        table.data th, table.data td {
+            border: 1px solid #333;
+            padding: 8px;
+            text-align: left;
+        }
+
+        table.data th {
+            background-color: #333;
+        }
+
+        table.data tr:nth-child(even) {
+            background-color: #1e1e1e;
+        }
+
+        a {
+            color: #bb86fc;
+            text-decoration: none;
+            margin-top: 20px;
+            display: inline-block;
+            font-size: 0.9em; /* Smaller font size for links */
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+
+        .keywords {
+            margin-bottom: 20px;
+            font-size: 1.1em;
+            color: #bb86fc;
+        }
+    </style>
+</head>
+<body>
+    <h1>Digital Decade Budget Keyword Search</h1>
+    <form method="post">
+        <label for="keywords">Enter keywords (comma-separated):</label>
+        <input type="text" id="keywords" name="keywords" required>
+        <input type="submit" value="Search">
+    </form>
+
+    {% if tables %}
+        <div class="keywords">
+            <strong>Keywords searched:</strong> {{ keywords|join(', ') }}
+        </div>
+        <h2>Search Results</h2>
+        <div class="table-container">{{ tables[0]|safe }}</div>
+        <a href="/download/Keyword_Summary.xlsx">Download Table</a>
+    {% endif %}
+</body>
+</html>
