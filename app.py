@@ -11,7 +11,7 @@ version = "_vtest"
 
 allFundNames = ["RRF", "CP", "HE21", "HE23", "HE25", "EuroHPC", "EIC", "IHI", "KDT", "SNS", "DEP", "CEF2"]
 
-mainfold = os.getcwd()
+mainfold = r"C:\Juan\Trabajo\JRC\Mapping\2025\2025\code_jtj\HPC investments\APP"
 outputfold = os.path.join(mainfold, "output")
 datafold = os.path.join(mainfold, "data")
 
@@ -209,19 +209,25 @@ def perform_keyword_search(keywords):
     summary_df = df.groupby('Fund')[cols_to_convert].sum()
     summary_df.loc['Total'] = summary_df.sum()
 
-    return summary_df
+    return summary_df, all_results
 
 @app.route('/', methods=['GET', 'POST'])
 def index():
     if request.method == 'POST':
         keywords = request.form.get('keywords').split(',')
         keywords = [kw.strip() for kw in keywords]
-        summary_df = perform_keyword_search(keywords)
+        summary_df, all_results = perform_keyword_search(keywords)  # Get both dataframes
 
         output_folder = os.path.join(mainfold, "code_jtj", "Keyword_search_results")
         os.makedirs(output_folder, exist_ok=True)
+
+        # Save summary_df to Excel
         summary_file = os.path.join(output_folder, "Keyword_Summary.xlsx")
         summary_df.to_excel(summary_file, index=True)
+
+        # Save all_results to Excel
+        all_results_file = os.path.join(output_folder, "All_Results.xlsx")
+        all_results.to_excel(all_results_file, index=False)
 
         # Clean up the DataFrame to ensure no leading/trailing whitespace
         summary_df.columns = summary_df.columns.str.strip()
