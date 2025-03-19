@@ -54,8 +54,8 @@ for i, file_path in enumerate(fundList):
 globals().update(df_dict)
 
 # DEP cleaning
-DEP = pd.read_excel(DEP_path, sheet_name="DEP DD WP23-24 shares", skiprows=1)
-DEP2 = pd.read_excel(DEP_path, sheet_name="DEP DD WP21-22&EDIH21-23 shares", skiprows=1)
+DEP = pd.read_excel(DEP_path, sheet_name="DEP DD WP23-24 shares")
+DEP2 = pd.read_excel(DEP_path, sheet_name="DEP DD WP21-22&EDIH21-23 shares")
 DEP3 = pd.read_excel(DEP25_27_path)
 
 DEP_main = pd.concat([DEP, DEP2, DEP3], ignore_index=True)
